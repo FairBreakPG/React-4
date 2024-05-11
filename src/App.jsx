@@ -9,23 +9,40 @@ import MiApi from './components/miApi/MiApi';
 function App() {
   const [champions, setChampions] = useState([]);
   const [buscarCampeon, setBuscarCampeon] = useState('');
+  const [orden, setOrden] = useState(false);
 
-  const handleBusqueda = (busqueda) => {
+  const busqueda = (busqueda) => {
     setBuscarCampeon(busqueda);
   };
 
-  const handleChampionsLoaded = (championsData) => {
+  const mostraCampeones = (championsData) => {
     setChampions(Object.values(championsData));
   };
+
+
+  const activarOrdenChexbox = ()=>{
+    setOrden (!orden)
+  }
+
 
   return (
     <div className='divGeneral'>
       <BarraMenu />
-      <Buscador busqueda={handleBusqueda} />
-      <MiApi cargarCampeones={handleChampionsLoaded} handleBusqueda={handleBusqueda} /> {/* Pasa la función handleBusqueda */}
+      <Buscador busqueda={busqueda} />
+      <div className='ordenResultados'>
+        <h3>menor a mayor:</h3>
+        <input  type="checkbox"  onChange={activarOrdenChexbox}></input>
+      </div>
+      <MiApi cargarCampeones={mostraCampeones} handleBusqueda={busqueda} /> 
       <div className="container">
         {champions
-          .filter(champion => champion.name.toLowerCase().includes(buscarCampeon.toLowerCase()))
+          .filter(champion => champion.name.toLowerCase().includes(buscarCampeon.toLowerCase())).sort((a, b) => {
+            if (orden) {
+              return b.name.localeCompare(a.name);
+            } else {
+              return a.name.localeCompare(b.name);
+            }
+          })
           .map((champion, index) => (
             <div key={index} className="card">
               <h2>{champion.name}</h2>

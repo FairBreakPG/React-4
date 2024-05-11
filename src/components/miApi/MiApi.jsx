@@ -15,15 +15,14 @@ function MiApi({ cargarCampeones, mostrarBusqueda }) {
       const datos = await respuesta.json();
       const championsData = datos.data;
       setChampions(Object.values(championsData)); 
-      cargarCampeones(Object.values(championsData)); 
+      cargarCampeones(Object.values(championsData));
+      console.log("datos",datos); 
     } catch (error) {
       console.error("Error al obtener los datos de la API:", error);
     }   
   }
+  
 
-  const busquedaC = (busqueda) => {
-    mostrarBusqueda(busqueda); 
-  };
 
   return (
     <>

@@ -4,3 +4,16 @@
   justify-content: center; 
   
 }
+
+.ordenResultados{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ordenResultados input[type="checkbox"] {
+  transform: scale(1.5); 
+  border: 2px solid transparent;
+
+}
+
