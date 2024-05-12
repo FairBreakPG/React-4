@@ -1,5 +1,6 @@
 # Api League of Legends
 
-URL Deploy:
-URL Video:
+URL Deploy: https://fairbreakpg.github.io/React-4/
+
+
 
